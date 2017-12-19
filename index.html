@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DIGITAL CLOCK</title>
+	<style type="text/css">
+		body{
+			background-color: black ;
+			color:yellow;
+
+		}
+		.clock{
+			position: absolute;
+			top:50%;
+			left:50%;
+
+			transform: translateX(-50%) translateY(-50%);
+
+			font-size: 100px;
+			border:5px solid cyan;
+			padding: 5px;
+		}
+			
+	</style>
+		
+		
+		
+</head>
+<body>
+	
+	<div id="display" class="clock"></div>
+
+	<script type="text/javascript">//show time
+
+	function showTime(){
+		var date=new Date();// create a date object to get hrs,min & sec 
+		var h=date.getHours();//0-23 24hour clock
+		var m=date.getMinutes();//0-59
+		var s=date.getSeconds();//0-59
+		var session = "AM";
+
+		if(h==0){
+			h=12;
+		}
+		if(h>12){ //12 hour clock
+			h=h-12;
+			session = "PM";
+		}
+
+		//fix the single digit issue
+		h = (h < 10) ? "0" + h : h;
+		m = (m < 10) ? "0" + m : m;
+		s = (s < 10) ? "0" + s : s; 
+		/*
+		if(h<10){
+			h="0"+h;
+		}
+		if(m<10){
+			m="0"+m;
+		}
+		if(s<10){
+			s="0"+s;
+		} */
+
+
+
+		var time=h + ":" + m + ":" + s + " " + session;
+
+		//supports cross browser
+		document.getElementById("display").innertext=time;//won't work in firefox
+		document.getElementById("display").textContent=time;//wont work in IE
+
+		setTimeout(showTime,1000);//1000 millisec 
+
+	}
+
+	showTime();//fn call
+	//setInterval(showTime,1000);//call showtime fn in 1 second f interval==>> keeps the clock running//use this instead of setTimeout
+
+	//setintrvl=> call fn in a specified time
+	//settimeout=>call specified fn once time is out
+
+		
+	</script>
+
+</body>
+</html>
